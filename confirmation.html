@@ -5,51 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmed! 💕</title>
     <style>
+
         body
         {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #f3e5ab, #d0f0c0);  /* A soft coffee/pistachio & creamy blend */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            background: linear-gradient(to bottom, #f3e5ab, #d0f0c0);
+            overflow-x: hidden;
+            overflow-y: auto;
             color: #5c3d28;
             text-align: center;
+            min-height: 100vh;
         }
+
         h1
         {
-            font-size: 2.8em;
+            font-size: 3em;
+            margin-top: 60px;
             margin-bottom: 20px;
         }
+
         p
         {
             font-size: 1.2em;
-            margin: 15px;
+            margin: 20px;
         }
+
         img
         {
             max-width: 400px;
             width: 80%;
         }
+
+        .rain
+        {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall
+        {
+            0%
+            {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100%
+            {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .map-container
+        {
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        iframe
+        {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 <body>
+
     <h1>YESSSSSS!</h1>
-    <!-- Replace with your own "YESSSSSS" gif or use a placeholder URL -->
     <img src="yesssss.gif" alt="YESSSSSS gif">
-    <p>Get ready for a delightful date full of coffee, croissants, and pistachio treats!</p>
-    <audio id="victoryAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay></audio>
+    <p>Get ready for a cozy adventure full of coffee, croissants, and pistachio goodness ☕🥐💚</p>
+
+    <!-- Map Section -->
+    <div class="map-container">
+        <h2>Where We're Headed</h2>
+        <p>This is just for your reference — I’d love to come get you myself 💚</p>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.4095695401654!2d-122.41941608468122!3d37.774929779759736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c2f4dcb65%3A0xfdd1c5d4d4b4ea50!2sCoffee%20Cafe%20Bakery!5e0!3m2!1sen!2sus!4v1710000000000" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <!-- Falling items -->
     <script>
-        // Play the victory music, then stop it after 10 seconds
-        const victoryAudio = document.getElementById("victoryAudio");
+        const icons = [
+            "coffee.png",        // your coffee cup image
+            "pistachio_croissant.png"  // your pistachio croissant image
+        ];
+
+        for (let i = 0; i < 25; i++)
+        {
+            const drop = document.createElement("div");
+            drop.classList.add("rain");
+            drop.style.left = Math.random() * 100 + "vw";
+            drop.style.animationDuration = (4 + Math.random() * 4) + "s";
+            drop.style.animationDelay = Math.random() * 5 + "s";
+            drop.style.top = "-80px";
+            drop.style.backgroundImage = `url('${icons[Math.floor(Math.random() * icons.length)]}')`;
+            document.body.appendChild(drop);
+        }
+
+        // 🎶 Short celebration music
+        const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+        audio.volume = 0.5;
+        audio.play();
         setTimeout(() =>
         {
-            victoryAudio.pause();
-            victoryAudio.currentTime = 0;
+            audio.pause();
+            audio.currentTime = 0;
         }, 10000);
     </script>
+
 </body>
 </html>
