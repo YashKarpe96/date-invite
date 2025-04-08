@@ -125,6 +125,7 @@
             transition: transform 0.3s ease;
         }
 
+        /* Sakura petals */
         .sakura
         {
             position: absolute;
@@ -150,6 +151,35 @@
                 opacity: 0;
             }
         }
+
+        /* Desktop Flower Positions */
+        #flower1 { top: 10vh; left: 7vw; }
+        #flower2 { top: 24vh; left: 20vw; }
+        #flower3 { top: 40vh; left: 30vw; }
+        #flower4 { top: 60vh; left: 40vw; }
+        #flower5 { top: 61vh; left: 50vw; }
+        #flower6 { top: 39vh; left: 60vw; }
+        #flower7 { top: 25vh; left: 70vw; }
+        #flower8 { top: 11vh; left: 82vw; }
+
+        /* Mobile adjustments */
+        @media screen and (max-width: 768px)
+        {
+            .flower
+            {
+                transform: scale(0.7);
+            }
+
+            #flower1 { top: 8vh; left: 5vw; }
+            #flower2 { top: 18vh; left: 15vw; }
+            #flower3 { top: 30vh; left: 25vw; }
+            #flower4 { top: 45vh; left: 35vw; }
+            #flower5 { top: 46vh; left: 45vw; }
+            #flower6 { top: 30vh; left: 55vw; }
+            #flower7 { top: 18vh; left: 65vw; }
+            #flower8 { top: 8vh; left: 75vw; }
+        }
+
     </style>
 </head>
 <body>
@@ -188,18 +218,18 @@
         </div>
     </div>
 
-    <!-- Fixed Flower Elements -->
-    <img class="flower" src="flower_closed.png" style="top: 10vh; left: 7vw;" id="flower1">
-    <img class="flower" src="flower_closed.png" style="top: 24vh; left: 20vw;" id="flower2">
-    <img class="flower" src="flower_closed.png" style="top: 40vh; left: 30vw;" id="flower3">
-    <img class="flower" src="flower_closed.png" style="top: 60vh; left: 40vw;" id="flower4">
-    <img class="flower" src="flower_closed.png" style="top: 61vh; left: 50vw;" id="flower5">
-    <img class="flower" src="flower_closed.png" style="top: 39vh; left: 60vw;" id="flower6">
-    <img class="flower" src="flower_closed.png" style="top: 25vh; left: 70vw;" id="flower7">
-    <img class="flower" src="flower_closed.png" style="top: 11vh; left: 82vw;" id="flower8">
+    <!-- Fixed Flowers -->
+    <img class="flower" src="flower_closed.png" id="flower1">
+    <img class="flower" src="flower_closed.png" id="flower2">
+    <img class="flower" src="flower_closed.png" id="flower3">
+    <img class="flower" src="flower_closed.png" id="flower4">
+    <img class="flower" src="flower_closed.png" id="flower5">
+    <img class="flower" src="flower_closed.png" id="flower6">
+    <img class="flower" src="flower_closed.png" id="flower7">
+    <img class="flower" src="flower_closed.png" id="flower8">
 
     <script>
-        // Sakura petals (like croissant rain)
+        // Sakura petals
         for (let i = 0; i < 30; i++)
         {
             const petal = document.createElement("div");
@@ -211,7 +241,7 @@
             document.body.appendChild(petal);
         }
 
-        // Sad modal logic
+        // Modal logic
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
@@ -226,22 +256,17 @@
             audio.currentTime = 0;
         }
 
-        // Flower animation on hover (desktop) or looped (mobile)
-        const flowers = [
-            document.getElementById("flower1"),
-            document.getElementById("flower2"),
-            document.getElementById("flower3")
-        ];
-
+        // Flower animation (hover for desktop, loop for mobile)
+        const flowerIds = ["flower1", "flower2", "flower3", "flower4", "flower5", "flower6", "flower7", "flower8"];
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        flowers.forEach((flower) =>
+        flowerIds.forEach((id) =>
         {
+            const flower = document.getElementById(id);
             flower.dataset.state = "closed";
 
             if (!isTouchDevice)
             {
-                // Desktop: hover interaction
                 flower.addEventListener("mouseenter", () =>
                 {
                     if (flower.dataset.state === "closed")
@@ -272,7 +297,6 @@
             }
             else
             {
-                // Mobile: loop animation every 6 seconds
                 setInterval(() =>
                 {
                     flower.src = "flower_opening.gif";
@@ -288,10 +312,9 @@
                             }, 2000);
                         }, 3000);
                     }, 2000);
-                }, 7000);
+                }, 7000 + Math.random() * 2000); // Slightly staggered
             }
         });
     </script>
-
 </body>
 </html>
