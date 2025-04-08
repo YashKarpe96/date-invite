@@ -289,7 +289,10 @@
             <h2>Oh no... 💔</h2>
             <p>Looks like it’s just me and the croissants now... 🌧️</p>
             <img src="sad.gif" style="width:200px;">
-            <audio id="sadAudio" src="rejected.mp3"></audio>
+            <audio id="sadAudio" preload="auto">
+            <source src="https://yashkarpe96.github.io/date-invite/rejected.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
         </div>
     </div>
 
@@ -363,7 +366,7 @@
         
             const sadAudio = document.getElementById("sadAudio");
             sadAudio.currentTime = 0;
-            sadAudio.play().catch(() => {});
+            sadAudio.play().catch(err => console.error("Sad audio error:", err));
         
             const bgMusic = document.getElementById("bg-music");
             if (bgMusic)
