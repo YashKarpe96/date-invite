@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sakura Summer Proposal</title>
-    
+
     <style>
-        
+
         body
         {
             margin: 0;
@@ -52,6 +52,8 @@
             border-radius: 25px;
             font-size: 1.1em;
             transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover
@@ -67,6 +69,7 @@
             background-image: url('petal.png');
             background-size: cover;
             animation: fall linear infinite;
+            pointer-events: none;
         }
 
         @keyframes fall
@@ -83,15 +86,24 @@
             }
         }
 
+        input
+        {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e06c9f;
+            margin: 5px;
+            font-size: 1em;
+        }
+
     </style>
 
 </head>
 <body>
 
     <div class="container">
-        
+
         <h1>Will You Be My Summer Date?</h1>
-        
+
         <p>
             Imagine a sunny afternoon, the air warm and soft,  
             cherry blossoms fluttering like our laughter in the breeze... 🌸<br><br>
@@ -99,13 +111,31 @@
             chirpy, bright, and full of energy, just like the perfect summer day.<br><br>
             So, how about we make it official? One summer day, just you and me. 💫
         </p>
-        
+
         <a class="btn" href="mailto:your.email@example.com?subject=YES to Summer Love 🌸">Yes, I’d love to!</a>
-    
+
+        <br><br><br>
+
+        <label for="date">Pick a date:</label><br>
+        <input type="date" id="date" name="date"><br><br>
+
+        <label for="time">Pick a time:</label><br>
+        <input type="time" id="time" name="time"><br><br>
+
+        <div>
+            <span style="cursor: pointer; color: #e06c9f; text-decoration: underline;" onclick="revealLocation()">Guess the Location?</span>
+            <p id="location" style="display:none;">🌅 It’s a surprise picnic under the trees… with your favorite treats!</p>
+        </div>
+
+        <br><br>
+
+        <button class="btn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
+
     </div>
 
     <script>
-        
+
+        // Falling petals animation
         for (let i = 0; i < 25; i++)
         {
             let petal = document.createElement("div");
@@ -114,6 +144,37 @@
             petal.style.animationDuration = (5 + Math.random() * 5) + "s";
             petal.style.animationDelay = Math.random() * 5 + "s";
             document.body.appendChild(petal);
+        }
+
+        // Reveal surprise location
+        function revealLocation()
+        {
+            document.getElementById("location").style.display = "block";
+        }
+
+        // Trigger sad gif and music if "No" is clicked
+        function triggerNo()
+        {
+            let sadGif = document.createElement("img");
+            sadGif.src = "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif";
+            sadGif.alt = "Sad crying gif";
+            sadGif.style.width = "200px";
+            sadGif.style.marginTop = "20px";
+
+            let audio = document.createElement("audio");
+            audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3";
+            audio.autoplay = true;
+            audio.loop = false;
+            audio.volume = 0.5;
+
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1>Oh no... 💔</h1>
+                    <p>Looks like I’ll have to take a walk under the sakura alone... 🌧️</p>
+                </div>
+            `;
+            document.body.appendChild(sadGif);
+            document.body.appendChild(audio);
         }
 
     </script>
