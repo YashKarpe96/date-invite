@@ -5,44 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sakura Summer Proposal</title>
     <style>
-        body
-        {
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(to top, #d1f4ff, #ffe9ec);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: #333;
-            text-align: center;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            color: #333;
         }
 
-        .container
-        {
+        .container {
             padding: 60px 20px;
             z-index: 2;
             position: relative;
         }
 
-        h1
-        {
+        h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #e06c9f;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid rgba(224, 108, 159, 0.75);
+            width: 0;
+            animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
         }
 
-        p
-        {
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        p {
             font-size: 1.2em;
             margin-bottom: 30px;
+            animation: fadeIn 3s ease-in-out;
         }
 
-        .btn
-        {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn {
             padding: 15px 30px;
             background-color: #ffb7c5;
             color: #fff;
@@ -56,14 +67,11 @@
             margin: 10px;
         }
 
-        .btn:hover
-        {
+        .btn:hover {
             background-color: #e06c9f;
         }
 
-        input[type="date"],
-        input[type="time"]
-        {
+        input[type="date"], input[type="time"] {
             padding: 12px;
             border-radius: 12px;
             border: 1px solid #e06c9f;
@@ -73,8 +81,7 @@
             box-shadow: 0 2px 5px rgba(224, 108, 159, 0.2);
         }
 
-        .button-row
-        {
+        .button-row {
             display: flex;
             justify-content: center;
             gap: 20px;
@@ -82,8 +89,7 @@
             margin-top: 20px;
         }
 
-        .modal
-        {
+        .modal, .yes-popup {
             position: fixed;
             top: 0;
             left: 0;
@@ -96,8 +102,7 @@
             z-index: 9999;
         }
 
-        .modal-content
-        {
+        .modal-content, .popup-content {
             background: white;
             padding: 20px;
             border-radius: 15px;
@@ -105,8 +110,7 @@
             position: relative;
         }
 
-        .close-btn
-        {
+        .close-btn {
             position: absolute;
             top: 5px;
             right: 10px;
@@ -115,18 +119,15 @@
             color: #999;
         }
 
-        .flower
-        {
+        .flower {
             position: absolute;
             width: 180px;
             height: 160px;
             pointer-events: auto;
             z-index: 2;
-            transition: transform 0.3s ease;
         }
 
-        .sakura
-        {
+        .sakura {
             position: absolute;
             width: 50px;
             height: 50px;
@@ -137,21 +138,31 @@
             top: -80px;
         }
 
-        @keyframes fall
-        {
-            0%
-            {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100%
-            {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+        .sparkle {
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
         }
 
-        /* Desktop Flower Positions */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e06c9f;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Flower positions (as you already had them) */
         #flower1 { top: 10vh; left: 7vw; }
         #flower2 { top: 24vh; left: 20vw; }
         #flower3 { top: 40vh; left: 30vw; }
@@ -161,10 +172,8 @@
         #flower7 { top: 25vh; left: 70vw; }
         #flower8 { top: 11vh; left: 82vw; }
 
-        @media screen and (max-width: 768px)
-        {
-            .flower
-            {
+        @media screen and (max-width: 768px) {
+            .flower {
                 transform: scale(0.6);
             }
 
@@ -177,30 +186,34 @@
             #flower7 { top: 55vh; left: 63vw; }
             #flower8 { top: 3vh; left: 67vw; }
         }
-
     </style>
 </head>
 <body>
 
+    <button id="music-toggle">🔊</button>
+
+    <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-love.mp3" loop autoplay></audio>
+    <audio id="petal-sound" src="https://freesound.org/data/previews/341/341695_6261010-lq.mp3"></audio>
+
     <div class="container">
         <h1>Will You Be My Summer Date?</h1>
         <p>
-            Imagine a sunny afternoon, the air warm and soft,  
+            Imagine a sunny afternoon, the air warm and soft,<br>
             cherry blossoms fluttering like our laughter in the breeze... 🌸<br><br>
-            I’ve really enjoyed our chats, and I think you’re absolutely lovely—  
+            I’ve really enjoyed our chats, and I think you’re absolutely lovely —<br>
             chirpy, bright, and full of energy, just like the perfect summer day.<br><br>
             So, how about we make it official? One summer day, just you and me. 💫
         </p>
 
         <br>
-        <label>Date: </label><br>
+        <label>Date:</label><br>
         <input type="date" value="2025-04-11" disabled><br><br>
 
         <label for="time">Pick a time:</label><br>
         <input type="time" id="time" name="time" min="17:00" max="18:00" value="17:00"><br><br>
 
         <div class="button-row">
-            <a class="btn" href="confirmation.html">Yes, I’d love to!</a>
+            <button class="btn" onclick="showYesPopup()">Yes, I’d love to!</button>
             <button class="btn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
         </div>
     </div>
@@ -216,6 +229,14 @@
         </div>
     </div>
 
+    <!-- Yes Popup -->
+    <div class="yes-popup" id="yesPopup">
+        <div class="popup-content">
+            <h2>Yaaay! 💖</h2>
+            <p>Get ready for a dreamy day 🌸✨</p>
+        </div>
+    </div>
+
     <!-- Flowers -->
     <img class="flower" src="flower_closed.png" id="flower1">
     <img class="flower" src="flower_closed.png" id="flower2">
@@ -227,98 +248,110 @@
     <img class="flower" src="flower_closed.png" id="flower8">
 
     <script>
-        // Sakura petals
-        for (let i = 0; i < 30; i++)
-        {
+        // Sakura petals with sparkle & sound
+        const sparkleIndices = [1, 2, 20, 29]; // 1 in 10 sparkle/sound
+        const petalSound = document.getElementById('petal-sound');
+
+        for (let i = 0; i < 30; i++) {
             const petal = document.createElement("div");
             petal.classList.add("sakura");
+            if (sparkleIndices.includes(i)) petal.classList.add("sparkle");
+
             petal.style.left = Math.random() * 100 + "vw";
             petal.style.animationDuration = (4 + Math.random() * 4) + "s";
             petal.style.animationDelay = Math.random() * 5 + "s";
             petal.style.backgroundImage = "url('petal.png')";
+
+            petal.addEventListener("animationiteration", () => {
+                if (sparkleIndices.includes(i)) {
+                    petalSound.currentTime = 0;
+                    petalSound.play();
+                }
+            });
+
             document.body.appendChild(petal);
         }
 
-        // Sad modal logic
-        function triggerNo()
-        {
+        // Background music toggle
+        const bgMusic = document.getElementById("bg-music");
+        const musicToggle = document.getElementById("music-toggle");
+        let isMuted = false;
+
+        musicToggle.addEventListener("click", () => {
+            isMuted = !isMuted;
+            bgMusic.muted = isMuted;
+            musicToggle.textContent = isMuted ? "🔇" : "🔊";
+        });
+
+        // No modal
+        function triggerNo() {
             document.getElementById("sadModal").style.display = "flex";
             document.getElementById("sadAudio").play();
         }
 
-        function closeModal()
-        {
+        function closeModal() {
             document.getElementById("sadModal").style.display = "none";
             const audio = document.getElementById("sadAudio");
             audio.pause();
             audio.currentTime = 0;
         }
 
-        // Flower animation for desktop & mobile
+        // Yes popup
+        function showYesPopup() {
+            const popup = document.getElementById("yesPopup");
+            popup.style.display = "flex";
+            setTimeout(() => {
+                popup.style.display = "none";
+                window.location.href = "confirmation.html";
+            }, 2500);
+        }
+
+        // Flowers: hover on desktop, loop on mobile
         const flowerIds = ["flower1", "flower2", "flower3", "flower4", "flower5", "flower6", "flower7", "flower8"];
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        flowerIds.forEach((id) =>
-        {
+        flowerIds.forEach(id => {
             const flower = document.getElementById(id);
             flower.dataset.state = "closed";
 
-            function animateFlower()
-            {
+            function animateFlower() {
                 flower.src = "flower_opening.gif";
-                setTimeout(() =>
-                {
+                setTimeout(() => {
                     flower.src = "flower_opened.png";
-                    setTimeout(() =>
-                    {
+                    setTimeout(() => {
                         flower.src = "flower_closing.gif";
-                        setTimeout(() =>
-                        {
+                        setTimeout(() => {
                             flower.src = "flower_closed.png";
                         }, 2000);
                     }, 3000);
                 }, 2000);
             }
 
-            if (!isTouchDevice)
-            {
-                // Desktop hover
-                flower.addEventListener("mouseenter", () =>
-                {
-                    if (flower.dataset.state === "closed")
-                    {
+            if (!isTouchDevice) {
+                flower.addEventListener("mouseenter", () => {
+                    if (flower.dataset.state === "closed") {
                         flower.dataset.state = "opening";
                         flower.src = "flower_opening.gif";
-                        setTimeout(() =>
-                        {
+                        setTimeout(() => {
                             flower.src = "flower_opened.png";
                             flower.dataset.state = "opened";
                         }, 2000);
                     }
                 });
 
-                flower.addEventListener("mouseleave", () =>
-                {
-                    if (flower.dataset.state === "opened")
-                    {
+                flower.addEventListener("mouseleave", () => {
+                    if (flower.dataset.state === "opened") {
                         flower.dataset.state = "closing";
                         flower.src = "flower_closing.gif";
-                        setTimeout(() =>
-                        {
+                        setTimeout(() => {
                             flower.src = "flower_closed.png";
                             flower.dataset.state = "closed";
                         }, 2000);
                     }
                 });
-            }
-            else
-            {
-                // Mobile: animate immediately and loop
-                animateFlower(); // Start immediately
-                setInterval(() =>
-                {
-                    animateFlower();
-                }, 7000 + Math.random() * 2000);
+            } else {
+                animateFlower();
+                setInterval(animateFlower, 7000 + Math.random() * 2000);
             }
         });
     </script>
