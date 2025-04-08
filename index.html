@@ -491,6 +491,31 @@
             });
         }
     </script>
+    <script>
+        function applyZoomCompensation()
+        {
+            const zoom = window.devicePixelRatio || 1;
+    
+            // Inverse zoom for scaling, capped between 0.4 and 1.0
+            const scale = Math.min(1 / zoom, 1.0);
+            const body = document.body;
+    
+            body.style.transform = `scale(${scale})`;
+            body.style.transformOrigin = "top left";
+            body.style.width = `${100 / scale}vw`;
+            body.style.height = `${100 / scale}vh`;
+            body.style.overflowX = "hidden";
+        }
+    
+        applyZoomCompensation();
+    
+        // Recalculate on resize (in case of zoom change)
+        window.addEventListener("resize", () =>
+        {
+            applyZoomCompensation();
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         emailjs.init("_nguxi2UUGB8x-PHC");
