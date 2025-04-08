@@ -343,7 +343,16 @@
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
-            document.getElementById("sadAudio").play();
+        
+            const sadAudio = document.getElementById("sadAudio");
+            sadAudio.currentTime = 0;
+            sadAudio.play().catch(() => {});
+        
+            const bgMusic = document.getElementById("bg-music");
+            if (bgMusic)
+            {
+                bgMusic.pause();
+            }
         }
 
         function closeModal()
