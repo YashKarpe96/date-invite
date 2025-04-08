@@ -125,7 +125,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Sakura petals */
         .sakura
         {
             position: absolute;
@@ -153,16 +152,15 @@
         }
 
         /* Desktop Flower Positions */
-        #flower1 { top: 10vh; left: 7vw; }
-        #flower2 { top: 24vh; left: 20vw; }
-        #flower3 { top: 40vh; left: 30vw; }
-        #flower4 { top: 60vh; left: 40vw; }
-        #flower5 { top: 61vh; left: 50vw; }
-        #flower6 { top: 39vh; left: 60vw; }
-        #flower7 { top: 25vh; left: 70vw; }
-        #flower8 { top: 11vh; left: 82vw; }
+        #flower1 { top: 4vh; left: -3vw; }
+        #flower2 { top: 18vh; left: 15vw; }
+        #flower3 { top: 30vh; left: 25vw; }
+        #flower4 { top: 45vh; left: 35vw; }
+        #flower5 { top: 46vh; left: 45vw; }
+        #flower6 { top: 30vh; left: 55vw; }
+        #flower7 { top: 18vh; left: 65vw; }
+        #flower8 { top: 3vh; left: 66.5vw; }
 
-        /* Mobile adjustments */
         @media screen and (max-width: 768px)
         {
             .flower
@@ -170,14 +168,14 @@
                 transform: scale(0.6);
             }
 
-            #flower1 { top: 4vh; left: -15vw; }
-            #flower2 { top: 55vh; left: -9vw; }
-            #flower3 { top: 81vh; left: -12vw; }
-            #flower4 { top: 100vh; left: -7vw; }
-            #flower5 { top: 101vh; left: 65vw; }
-            #flower6 { top: 80vh; left: 68vw; }
-            #flower7 { top: 55vh; left: 63vw; }
-            #flower8 { top: 3vh; left: 67vw; }
+            #flower1 { top: 4vh; left: -3vw; }
+            #flower2 { top: 18vh; left: 15vw; }
+            #flower3 { top: 30vh; left: 25vw; }
+            #flower4 { top: 45vh; left: 35vw; }
+            #flower5 { top: 46vh; left: 45vw; }
+            #flower6 { top: 30vh; left: 55vw; }
+            #flower7 { top: 18vh; left: 65vw; }
+            #flower8 { top: 3vh; left: 66.5vw; }
         }
 
     </style>
@@ -218,7 +216,7 @@
         </div>
     </div>
 
-    <!-- Fixed Flowers -->
+    <!-- Flowers -->
     <img class="flower" src="flower_closed.png" id="flower1">
     <img class="flower" src="flower_closed.png" id="flower2">
     <img class="flower" src="flower_closed.png" id="flower3">
@@ -241,7 +239,7 @@
             document.body.appendChild(petal);
         }
 
-        // Modal logic
+        // Sad modal logic
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
@@ -256,7 +254,7 @@
             audio.currentTime = 0;
         }
 
-        // Flower animation (hover for desktop, loop for mobile)
+        // Flower animation for desktop & mobile
         const flowerIds = ["flower1", "flower2", "flower3", "flower4", "flower5", "flower6", "flower7", "flower8"];
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -265,8 +263,26 @@
             const flower = document.getElementById(id);
             flower.dataset.state = "closed";
 
+            function animateFlower()
+            {
+                flower.src = "flower_opening.gif";
+                setTimeout(() =>
+                {
+                    flower.src = "flower_opened.png";
+                    setTimeout(() =>
+                    {
+                        flower.src = "flower_closing.gif";
+                        setTimeout(() =>
+                        {
+                            flower.src = "flower_closed.png";
+                        }, 2000);
+                    }, 3000);
+                }, 2000);
+            }
+
             if (!isTouchDevice)
             {
+                // Desktop hover
                 flower.addEventListener("mouseenter", () =>
                 {
                     if (flower.dataset.state === "closed")
@@ -297,22 +313,12 @@
             }
             else
             {
+                // Mobile: animate immediately and loop
+                animateFlower(); // Start immediately
                 setInterval(() =>
                 {
-                    flower.src = "flower_opening.gif";
-                    setTimeout(() =>
-                    {
-                        flower.src = "flower_opened.png";
-                        setTimeout(() =>
-                        {
-                            flower.src = "flower_closing.gif";
-                            setTimeout(() =>
-                            {
-                                flower.src = "flower_closed.png";
-                            }, 2000);
-                        }, 3000);
-                    }, 2000);
-                }, 7000 + Math.random() * 2000); // Slightly staggered
+                    animateFlower();
+                }, 7000 + Math.random() * 2000);
             }
         });
     </script>
