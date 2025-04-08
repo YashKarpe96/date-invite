@@ -141,14 +141,10 @@
         }
 
         // 🎶 Short celebration music
-        const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
-        audio.volume = 0.5;
+        const audio = new Audio("cheering.wav");
+        audio.volume = 0.7; // adjust volume as you like
         audio.play();
-        setTimeout(() =>
-        {
-            audio.pause();
-            audio.currentTime = 0;
-        }, 10000);
+
     </script>
 
 </body>
