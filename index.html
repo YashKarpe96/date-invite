@@ -240,6 +240,15 @@
             transition: transform 0.3s ease;
             pointer-events: auto;
         }
+        /* Hide zoom hint on mobile */
+        @media screen and (max-width: 768px)
+        {
+            .zoom-hint
+            {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -263,7 +272,7 @@
             <p>Tap to Begin the Experience 🌸</p>
             <div style="margin-top: 100px;">
                 <button class="btn" onclick="startExperience()">Let’s go!</button>
-                <p style="font-size: 0.7em; opacity: 0.5; margin-top: 10px; font-family: sans-serif;">Set zoom to 80%</p>
+                <p class="zoom-hint" style="font-size: 0.4em; opacity: 0.4; margin-top: 10px; font-family: sans-serif;">Please set zoom to 80%</p>
             </div>
         </div>
     </div>
