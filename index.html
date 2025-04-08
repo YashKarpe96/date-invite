@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Summer Proposal</title>
+    
+    <style>
+        
+        body
+        {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to top, #ffe9ec, #d1f4ff);
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container
+        {
+            padding: 60px 20px;
+        }
+
+        h1
+        {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #e06c9f;
+        }
+
+        p
+        {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .btn
+        {
+            padding: 15px 30px;
+            background-color: #ffb7c5;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover
+        {
+            background-color: #e06c9f;
+        }
+
+        .petal
+        {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://i.imgur.com/j0nkn1u.png');
+            background-size: cover;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall
+        {
+            0%
+            {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100%
+            {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Will You Be My Summer Date?</h1>
+        
+        <p>
+            Imagine a sunny afternoon, the air warm and soft,  
+            cherry blossoms fluttering like our laughter in the breeze... 🌸<br><br>
+            I’ve really enjoyed our chats, and I think you’re absolutely lovely—  
+            chirpy, bright, and full of energy, just like the perfect summer day.<br><br>
+            So, how about we make it official? One summer day, just you and me. 💫
+        </p>
+        
+        <a class="btn" href="mailto:your.email@example.com?subject=YES to Summer Love 🌸">Yes, I’d love to!</a>
+    
+    </div>
+
+    <script>
+        
+        for (let i = 0; i < 25; i++)
+        {
+            let petal = document.createElement("div");
+            petal.classList.add("petal");
+            petal.style.left = Math.random() * 100 + "vw";
+            petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+            petal.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(petal);
+        }
+
+    </script>
+
+</body>
+</html>
