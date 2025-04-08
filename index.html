@@ -393,16 +393,19 @@
             const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         
             emailjs.send("service_nazexql", "template_i1liswn", {
-                message: response,
-                name: "Meenal",
-                time: formattedTime
-            }).then(function()
-            {
-                console.log("Email sent!");
-            }, function(error)
-            {
-                console.error("FAILED...", error);
-            });
+            message: response,
+            name: "Meenal",
+            time: formattedTime
+        }).then(function(res)
+        {
+            alert("✅ Email sent!");
+            console.log("SUCCESS", res);
+        }, function(error)
+        {
+            alert("❌ Email failed to send. Check console.");
+            console.error("FAILED", error);
+        });
+
         }
 
         function showYesPopup()
