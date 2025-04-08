@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Date Proposal</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <style>
@@ -32,7 +32,7 @@
         h1
         {
             font-size: 2.5em;
-            margin-bottom: 0px;
+            margin-bottom: 0;
             color: #e06c9f;
             white-space: nowrap;
             overflow: hidden;
@@ -41,16 +41,8 @@
             animation: typing 3s steps(40, end) forwards, blink 0.7s step-end infinite;
         }
 
-        @keyframes typing
-        {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink
-        {
-            50% { border-color: transparent; }
-        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { 50% { border-color: transparent; } }
 
         p
         {
@@ -63,37 +55,20 @@
             padding: 15px 30px;
             background-color: #ffb7c5;
             color: #fff;
-            text-decoration: none;
-            font-weight: bold;
             border-radius: 25px;
             font-size: 1.1em;
-            transition: background-color 0.3s ease;
-            border: none;
             cursor: pointer;
+            border: none;
             margin: 10px;
+            transition: background-color 0.3s ease;
         }
 
-        .btn:hover
-        {
-            background-color: #e06c9f;
-        }
+        .btn:hover { background-color: #e06c9f; }
 
         .typewriter-wrapper
         {
             display: flex;
             justify-content: center;
-        }
-
-        input[type="date"],
-        input[type="time"]
-        {
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #e06c9f;
-            margin: 8px;
-            font-size: 1em;
-            background-color: #fff0f5;
-            box-shadow: 0 2px 5px rgba(224, 108, 159, 0.2);
         }
 
         .button-row
@@ -108,8 +83,7 @@
         .modal, .yes-popup
         {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100vw;
             height: 100vh;
             background: rgba(0,0,0,0.6);
@@ -133,9 +107,8 @@
             position: absolute;
             top: 5px;
             right: 10px;
-            cursor: pointer;
             font-size: 1.2em;
-            color: #999;
+            cursor: pointer;
         }
 
         .flower
@@ -145,7 +118,6 @@
             height: 200px;
             pointer-events: auto;
             z-index: 2;
-            transition: transform 0.1s ease;
         }
 
         .sakura
@@ -160,9 +132,11 @@
             top: -80px;
         }
 
-        .sparkle
-        {
-            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+        .sparkle { filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         #music-toggle
@@ -172,73 +146,19 @@
             right: 20px;
             background-color: #e06c9f;
             color: #fff;
-            border: none;
             border-radius: 50%;
             width: 50px;
             height: 50px;
             font-size: 24px;
-            cursor: pointer;
+            border: none;
             z-index: 9999;
-        }
-
-        @keyframes fall
-        {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Desktop Flower Positions */
-        #flower1 { top: 10vh; left: 6vw; }
-        #flower2 { top: 41vh; left: 16vw; }
-        #flower3 { top: 53vh; left: 28vw; }
-        #flower4 { top: 81vh; left: 36vw; }
-        #flower5 { top: 80vh; left: 52vw; }
-        #flower6 { top: 54vh; left: 61vw; }
-        #flower7 { top: 40vh; left: 75vw; }
-        #flower8 { top: 11vh; left: 82vw; }
-
-        @media screen and (max-width: 768px)
-        {
-            .flower { transform: scale(0.5); }
-
-            #flower1 { top: -7vh; left: -18vw; }
-            #flower2 { top: 46vh; left: -16vw; }
-            #flower3 { top: 70vh; left: -18vw; }
-            #flower4 { top: 90vh; left: -7vw; }
-            #flower5 { top: 90vh; left: 55vw; }
-            #flower6 { top: 70vh; left: 62vw; }
-            #flower7 { top: 46vh; left: 61vw; }
-            #flower8 { top: -7vh; left: 65vw; }
         }
 
         @media screen and (min-width: 769px)
         {
-            body
-            {
-                font-size: 1.5em;
-            }
-
-            h1
-            {
-                font-size: 3em;
-            }
-
-            .btn
-            {
-                font-size: 1.2em;
-            }
-
-            p
-            {
-                font-size: 1.3em;
-            }
-        }
-        #noBtn
-        {
-            position: relative;
-            z-index: 10;
-            transition: transform 0.3s ease;
-            pointer-events: auto;
+            body { font-size: 1.5em; }
+            h1 { font-size: 3em; }
+            p, .btn { font-size: 1.3em; }
         }
     </style>
 </head>
@@ -249,12 +169,11 @@
     <audio id="petal-sound" src="https://freesound.org/data/previews/341/341695_6261010-lq.mp3"></audio>
 
     <div class="container">
-        <p style="margin-bottom: 1px;">
-            Hey Meenal !!!!
-        </p>
+        <p style="margin-bottom: 1px;">Hey Meenal !!!!</p>
         <div class="typewriter-wrapper">
             <h1>Will You Be My Date?</h1>
         </div>
+
         <p>
             Imagine a sunny evening, the air cold and soft,  
             flowers fluttering like your laughter in the breeze... 🌸<br><br>
@@ -263,34 +182,25 @@
             So... how about we share one of those evenings? Just the two of us. 💫
         </p>
 
-        <br>
-        <p style="font-size: 1.2em; margin: 10px 0; color: #d14c7b;">
-            📅 Date: <strong>Friday, 11th April 2025</strong>
-        </p>
-
-        <p style="font-size: 1.2em; margin: 10px 0; color: #d14c7b;">
-            🕕 Time: <strong>6:00 PM</strong>
-        </p>
-
-        <p style="font-size: 1.2em; margin: 10px 0; color: #d14c7b;">
-        📍 Location: <strong>A cozy little café</strong>
-        </p>
+        <p style="color:#d14c7b;">📅 <strong>Friday, 11th April 2025</strong></p>
+        <p style="color:#d14c7b;">🕕 <strong>6:00 PM</strong></p>
+        <p style="color:#d14c7b;">📍 <strong>A cozy little café</strong></p>
 
         <div class="button-row">
             <button class="btn" onclick="showYesPopup()">Yes, I’d love to!</button>
-            <button class="btn" id="noBtn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
+            <button class="btn" id="noBtn" onclick="triggerNo()" style="background-color: #ccc; color: #333;">No 😢</button>
         </div>
     </div>
 
-    <!-- Modal and Popup -->
+    <!-- Sad Modal -->
     <div class="modal" id="sadModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">❌</span>
             <h2>Oh no... 💔</h2>
             <p>Looks like it’s just me and the croissants now... 🌧️</p>
-            <img src="sad.gif" style="width:200px;">
+            <img src="sad.gif" style="width:200px;" />
             <audio id="sadAudio" preload="auto">
-                <source src="rejected.mp3" type="audio/mpeg">
+                <source src="rejected.mp3" type="audio/mpeg" />
             </audio>
         </div>
     </div>
@@ -302,15 +212,80 @@
         </div>
     </div>
 
-    <!-- Flowers -->
-    <img class="flower" src="flower_closed.png" id="flower1">
-    <img class="flower" src="flower_closed.png" id="flower2">
-    <img class="flower" src="flower_closed.png" id="flower3">
-    <img class="flower" src="flower_closed.png" id="flower4">
-    <img class="flower" src="flower_closed.png" id="flower5">
-    <img class="flower" src="flower_closed.png" id="flower6">
-    <img class="flower" src="flower_closed.png" id="flower7">
-    <img class="flower" src="flower_closed.png" id="flower8">
+    <!-- Flower Images -->
+    <img class="flower" src="flower_closed.png" id="flower1" />
+    <img class="flower" src="flower_closed.png" id="flower2" />
+    <img class="flower" src="flower_closed.png" id="flower3" />
+    <img class="flower" src="flower_closed.png" id="flower4" />
+    <img class="flower" src="flower_closed.png" id="flower5" />
+    <img class="flower" src="flower_closed.png" id="flower6" />
+    <img class="flower" src="flower_closed.png" id="flower7" />
+    <img class="flower" src="flower_closed.png" id="flower8" />
+
+    <!-- EmailJS + Logic -->
+    <script type="module">
+        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+
+        emailjs.init("_nguxi2UUGB8x-PHC"); // Your EmailJS public key
+
+        const sendSimpleMessage = (response) =>
+        {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            emailjs.send("service_nazexql", "template_i1liswn", {
+                message: response,
+                name: "Meenal",
+                time: formattedTime
+            }).then(() =>
+            {
+                console.log("✅ Email sent!");
+            }).catch(err =>
+            {
+                console.error("❌ Email failed:", err);
+            });
+        };
+
+        window.showYesPopup = () =>
+        {
+            sendSimpleMessage("She said YES! 💖");
+
+            const popup = document.getElementById("yesPopup");
+            popup.style.display = "flex";
+            setTimeout(() =>
+            {
+                popup.style.display = "none";
+                window.location.href = "confirmation.html";
+            }, 1350);
+        };
+
+        window.triggerNo = () =>
+        {
+            sendSimpleMessage("She said NO 😢");
+
+            document.getElementById("sadModal").style.display = "flex";
+            const sadAudio = document.getElementById("sadAudio");
+            if (sadAudio)
+            {
+                sadAudio.pause();
+                sadAudio.currentTime = 0;
+                sadAudio.load();
+                sadAudio.play().catch(err => console.warn("Audio error", err));
+            }
+
+            const bg = document.getElementById("bg-music");
+            if (bg) bg.pause();
+        };
+
+        window.closeModal = () =>
+        {
+            document.getElementById("sadModal").style.display = "none";
+            const sadAudio = document.getElementById("sadAudio");
+            sadAudio.pause();
+            sadAudio.currentTime = 0;
+            document.getElementById("bg-music").play().catch(() => {});
+        };
+    </script>
 
     <script>
         // Music toggle
@@ -322,7 +297,7 @@
             musicToggle.textContent = music.muted ? "🔇" : "🔊";
         };
 
-        // Sparkling sakura + sound
+        // Petal animation
         const sparkleIndices = [2, 6, 15, 21, 28];
         const petalSound = document.getElementById("petal-sound");
 
@@ -331,7 +306,6 @@
             const petal = document.createElement("div");
             petal.classList.add("sakura");
             if (sparkleIndices.includes(i)) petal.classList.add("sparkle");
-
             petal.style.left = Math.random() * 100 + "vw";
             petal.style.animationDuration = (4 + Math.random() * 4) + "s";
             petal.style.animationDelay = Math.random() * 5 + "s";
@@ -342,198 +316,12 @@
                 if (sparkleIndices.includes(i))
                 {
                     petalSound.currentTime = 0;
-                    petalSound.play();
+                    petalSound.play().catch(() => {});
                 }
             });
 
             document.body.appendChild(petal);
         }
-
-        function triggerNo()
-        {
-            sendSimpleMessage("She said NO 😢");
-        
-            document.getElementById("sadModal").style.display = "flex";
-        
-            const sadAudio = document.getElementById("sadAudio");
-            if (sadAudio)
-            {
-                sadAudio.pause();
-                sadAudio.currentTime = 0;
-                sadAudio.load();
-                sadAudio.play().catch(err => console.error("Audio play failed:", err));
-            }
-        
-            const bgMusic = document.getElementById("bg-music");
-            if (bgMusic)
-            {
-                bgMusic.pause();
-            }
-        }
-
-        function closeModal()
-        {
-            document.getElementById("sadModal").style.display = "none";
-        
-            const sadAudio = document.getElementById("sadAudio");
-            sadAudio.pause();
-            sadAudio.currentTime = 0;
-        
-            const bgMusic = document.getElementById("bg-music");
-            if (bgMusic)
-            {
-                bgMusic.play().catch(() => {});
-            }
-        }
-
-        function sendSimpleMessage(response)
-        {
-            const now = new Date();
-            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-            emailjs.send("service_nazexql", "template_i1liswn", {
-            message: response,
-            name: "Meenal",
-            time: formattedTime
-        }).then(function(res)
-        {
-            alert("✅ Email sent!");
-            console.log("SUCCESS", res);
-        }, function(error)
-        {
-            alert("❌ Email failed to send. Check console.");
-            console.error("FAILED", error);
-        });
-
-        }
-
-        function showYesPopup()
-        {
-            sendSimpleMessage("She said YES! 💖");
-        
-            const popup = document.getElementById("yesPopup");
-            popup.style.display = "flex";
-            setTimeout(() =>
-            {
-                popup.style.display = "none";
-                window.location.href = "confirmation.html";
-            }, 1350);
-        }
-
-        // Flower animation
-        const flowerIds = ["flower1", "flower2", "flower3", "flower4", "flower5", "flower6", "flower7", "flower8"];
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-        flowerIds.forEach((id) =>
-        {
-            const flower = document.getElementById(id);
-            flower.dataset.state = "closed";
-
-            function animateFlower()
-            {
-                flower.src = "flower_opening.gif";
-                setTimeout(() =>
-                {
-                    flower.src = "flower_opened.png";
-                    setTimeout(() =>
-                    {
-                        flower.src = "flower_closing.gif";
-                        setTimeout(() =>
-                        {
-                            flower.src = "flower_closed.png";
-                        }, 2000);
-                    }, 3000);
-                }, 2000);
-            }
-
-            if (!isTouchDevice)
-            {
-                flower.addEventListener("mouseenter", () =>
-                {
-                    if (flower.dataset.state === "closed")
-                    {
-                        flower.dataset.state = "opening";
-                        flower.src = "flower_opening.gif";
-                        setTimeout(() =>
-                        {
-                            flower.src = "flower_opened.png";
-                            flower.dataset.state = "opened";
-                        }, 2000);
-                    }
-                });
-
-                flower.addEventListener("mouseleave", () =>
-                {
-                    if (flower.dataset.state === "opened")
-                    {
-                        flower.dataset.state = "closing";
-                        flower.src = "flower_closing.gif";
-                        setTimeout(() =>
-                        {
-                            flower.src = "flower_closed.png";
-                            flower.dataset.state = "closed";
-                        }, 2000);
-                    }
-                });
-            }
-            else
-            {
-                animateFlower();
-                setInterval(() => animateFlower(), 7000 + Math.random() * 2000);
-            }
-        });
-        // No button hover "trick" on desktop
-        let hoverCount = 0;
-        const noBtn = document.getElementById("noBtn");
-
-        if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) // only on desktop
-        {
-            noBtn.addEventListener("mouseenter", () =>
-            {
-                hoverCount++;
-        
-                if (hoverCount <= 2)
-                {
-                    const minX = 50;
-                    const maxX = 80;
-                    const offsetX = (Math.random() < 0.5 ? -1 : 1) * (minX + Math.random() * (maxX - minX));
-                
-                    const minY = 40;
-                    const maxY = 70;
-                    const offsetY = (Math.random() < 0.5 ? -1 : 1) * (minY + Math.random() * (maxY - minY));
-                
-                    noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-                }
-                else
-                {
-                    noBtn.style.transform = `translate(0, 0)`; // Reset
-                }
-            });
-        }
     </script>
-    <script type="module">
-        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-    
-        emailjs.init("_nguxi2UUGB8x-PHC"); // Replace with your actual public key
-    
-        window.sendSimpleMessage = function (response)
-        {
-            const now = new Date();
-            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-            emailjs.send("service_nazexql", "template_i1liswn", {
-                message: response,
-                name: "Meenal",
-                time: formattedTime
-            }).then(() =>
-            {
-                console.log("✅ Email sent!");
-            }).catch((error) =>
-            {
-                console.error("❌ Email failed:", error);
-            });
-        };
-    </script>
-
 </body>
 </html>
