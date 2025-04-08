@@ -490,12 +490,11 @@
             });
         }
     </script>
-    <script type="module">
-        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init("_nguxi2UUGB8x-PHC");
     
-        emailjs.init("_nguxi2UUGB8x-PHC"); // Replace with your actual public key
-    
-        window.sendSimpleMessage = function (response)
+        function sendSimpleMessage(response)
         {
             const now = new Date();
             const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -511,7 +510,7 @@
             {
                 console.error("❌ Email failed:", error);
             });
-        };
+        }
     </script>
 
 </body>
