@@ -20,23 +20,27 @@
             min-height: 100vh;
             position: relative;
         }
+
         .container
         {
             padding: 60px 20px;
             z-index: 2;
             position: relative;
         }
+
         h1
         {
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #e06c9f;
         }
+
         p
         {
             font-size: 1.2em;
             margin-bottom: 30px;
         }
+
         .btn
         {
             padding: 15px 30px;
@@ -51,33 +55,12 @@
             cursor: pointer;
             margin: 10px;
         }
+
         .btn:hover
         {
             background-color: #e06c9f;
         }
-        .petal
-        {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-image: url('petal.png');
-            background-size: cover;
-            animation: fall linear infinite;
-            pointer-events: none;
-        }
-        @keyframes fall
-        {
-            0%
-            {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 1;
-            }
-            100%
-            {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
+
         input[type="date"],
         input[type="time"]
         {
@@ -89,6 +72,7 @@
             background-color: #fff0f5;
             box-shadow: 0 2px 5px rgba(224, 108, 159, 0.2);
         }
+
         .button-row
         {
             display: flex;
@@ -97,7 +81,7 @@
             flex-wrap: wrap;
             margin-top: 20px;
         }
-        /* Modal for sad gif */
+
         .modal
         {
             position: fixed;
@@ -111,6 +95,7 @@
             align-items: center;
             z-index: 9999;
         }
+
         .modal-content
         {
             background: white;
@@ -119,6 +104,7 @@
             text-align: center;
             position: relative;
         }
+
         .close-btn
         {
             position: absolute;
@@ -128,29 +114,46 @@
             font-size: 1.2em;
             color: #999;
         }
-        /* Flowers */
-        #flowers-container
-        {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
+
         .flower
         {
             position: absolute;
-            width: 220px;
-            height: 200px;
+            width: 180px;
+            height: 160px;
             pointer-events: auto;
             z-index: 2;
             transition: transform 0.3s ease;
         }
+
+        .sakura
+        {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: fall linear infinite;
+            pointer-events: none;
+            top: -80px;
+        }
+
+        @keyframes fall
+        {
+            0%
+            {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100%
+            {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Will You Be My Summer Date?</h1>
         <p>
@@ -160,17 +163,20 @@
             chirpy, bright, and full of energy, just like the perfect summer day.<br><br>
             So, how about we make it official? One summer day, just you and me. 💫
         </p>
+
         <br>
         <label>Date: </label><br>
         <input type="date" value="2025-04-11" disabled><br><br>
+
         <label for="time">Pick a time:</label><br>
         <input type="time" id="time" name="time" min="17:00" max="18:00" value="17:00"><br><br>
+
         <div class="button-row">
-            <!-- When "Yes" is clicked, it goes to confirmation.html -->
             <a class="btn" href="confirmation.html">Yes, I’d love to!</a>
             <button class="btn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
         </div>
     </div>
+
     <!-- Sad Modal -->
     <div class="modal" id="sadModal">
         <div class="modal-content">
@@ -181,25 +187,32 @@
             <audio id="sadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" autoplay loop></audio>
         </div>
     </div>
-    <!-- Flower Elements -->
-    <div id="flowers-container"></div>
+
+    <!-- Fixed Flower Elements -->
+    <img class="flower" src="flower_closed.png" style="top: 100vh; left: 10vw;" id="flower1">
+    <img class="flower" src="flower_closed.png" style="top: 110vh; left: 40vw;" id="flower2">
+    <img class="flower" src="flower_closed.png" style="top: 120vh; left: 70vw;" id="flower3">
+
     <script>
-        // Sakura petals
-        for (let i = 0; i < 25; i++)
+        // Sakura petals (like croissant rain)
+        for (let i = 0; i < 30; i++)
         {
-            let petal = document.createElement("div");
-            petal.classList.add("petal");
+            const petal = document.createElement("div");
+            petal.classList.add("sakura");
             petal.style.left = Math.random() * 100 + "vw";
-            petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+            petal.style.animationDuration = (4 + Math.random() * 4) + "s";
             petal.style.animationDelay = Math.random() * 5 + "s";
+            petal.style.backgroundImage = "url('petal.png')";
             document.body.appendChild(petal);
         }
-        // No button sad modal functions
+
+        // Sad modal logic
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
             document.getElementById("sadAudio").play();
         }
+
         function closeModal()
         {
             document.getElementById("sadModal").style.display = "none";
@@ -207,46 +220,73 @@
             audio.pause();
             audio.currentTime = 0;
         }
-        // Interactive flowers
-        const flowerCount = 10;
-        const flowerContainer = document.getElementById("flowers-container");
-        for (let i = 0; i < flowerCount; i++)
+
+        // Flower animation on hover (desktop) or looped (mobile)
+        const flowers = [
+            document.getElementById("flower1"),
+            document.getElementById("flower2"),
+            document.getElementById("flower3")
+        ];
+
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        flowers.forEach((flower) =>
         {
-            const flower = document.createElement("img");
-            flower.classList.add("flower");
-            flower.src = "flower_closed.png";
-            flower.style.top = Math.random() * 90 + "vh";
-            flower.style.left = Math.random() * 90 + "vw";
-            // Track animation state
             flower.dataset.state = "closed";
-            flower.addEventListener("mouseenter", () =>
+
+            if (!isTouchDevice)
             {
-                if (flower.dataset.state === "closed")
+                // Desktop: hover interaction
+                flower.addEventListener("mouseenter", () =>
                 {
-                    flower.dataset.state = "opening";
+                    if (flower.dataset.state === "closed")
+                    {
+                        flower.dataset.state = "opening";
+                        flower.src = "flower_opening.gif";
+                        setTimeout(() =>
+                        {
+                            flower.src = "flower_opened.png";
+                            flower.dataset.state = "opened";
+                        }, 2000);
+                    }
+                });
+
+                flower.addEventListener("mouseleave", () =>
+                {
+                    if (flower.dataset.state === "opened")
+                    {
+                        flower.dataset.state = "closing";
+                        flower.src = "flower_closing.gif";
+                        setTimeout(() =>
+                        {
+                            flower.src = "flower_closed.png";
+                            flower.dataset.state = "closed";
+                        }, 2000);
+                    }
+                });
+            }
+            else
+            {
+                // Mobile: loop animation every 6 seconds
+                setInterval(() =>
+                {
                     flower.src = "flower_opening.gif";
                     setTimeout(() =>
                     {
                         flower.src = "flower_opened.png";
-                        flower.dataset.state = "opened";
-                    }, 2000); // adjust based on gif duration
-                }
-            });
-            flower.addEventListener("mouseleave", () =>
-            {
-                if (flower.dataset.state === "opened")
-                {
-                    flower.dataset.state = "closing";
-                    flower.src = "flower_closing.gif";
-                    setTimeout(() =>
-                    {
-                        flower.src = "flower_closed.png";
-                        flower.dataset.state = "closed";
-                    }, 2000); // adjust based on gif duration
-                }
-            });
-            flowerContainer.appendChild(flower);
-        }
+                        setTimeout(() =>
+                        {
+                            flower.src = "flower_closing.gif";
+                            setTimeout(() =>
+                            {
+                                flower.src = "flower_closed.png";
+                            }, 2000);
+                        }, 3000);
+                    }, 2000);
+                }, 7000);
+            }
+        });
     </script>
+
 </body>
 </html>
