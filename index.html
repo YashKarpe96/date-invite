@@ -244,6 +244,27 @@
 </head>
 <body>
 
+    <div id="startOverlay" style="
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(255, 240, 245, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        font-size: 1.5em;
+        font-family: 'Dancing Script', cursive;
+        color: #d14c7b;
+        text-align: center;
+        padding: 20px;
+        ">
+        <div>
+            <p>Tap to Begin the Experience 🌸</p>
+            <button class="btn" onclick="startExperience()">Let’s go!</button>
+        </div>
+    </div>
+
     <button id="music-toggle">🔊</button>
     <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-love.mp3" autoplay loop></audio>
     <audio id="petal-sound" src="https://freesound.org/data/previews/341/341695_6261010-lq.mp3"></audio>
@@ -489,6 +510,20 @@
                     noBtn.style.transform = `translate(0, 0)`; // Reset
                 }
             });
+        }
+    </script>
+
+    <script>
+        function startExperience()
+        {
+            document.getElementById("startOverlay").style.display = "none";
+    
+            const music = document.getElementById("bg-music");
+            if (music)
+            {
+                music.muted = false;
+                music.play().catch(err => console.log("Playback failed:", err));
+            }
         }
     </script>
 
