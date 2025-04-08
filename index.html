@@ -159,12 +159,10 @@
         .flower
         {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background-image: url('flower_opening.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
+            width: 120px;
+            height: 120px;
             pointer-events: auto;
+            transition: transform 0.3s ease;
         }
 
     </style>
@@ -219,7 +217,7 @@
 
     <script>
 
-        // Petals
+        // Sakura petals
         for (let i = 0; i < 25; i++)
         {
             let petal = document.createElement("div");
@@ -230,13 +228,13 @@
             document.body.appendChild(petal);
         }
 
-        // Location reveal
+        // Reveal surprise location
         function revealLocation()
         {
             document.getElementById("location").style.display = "block";
         }
 
-        // No button modal
+        // No button sad modal
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
@@ -246,31 +244,56 @@
         function closeModal()
         {
             document.getElementById("sadModal").style.display = "none";
-            let audio = document.getElementById("sadAudio");
+            const audio = document.getElementById("sadAudio");
             audio.pause();
             audio.currentTime = 0;
         }
 
-        // Flowers
+        // Interactive flowers
         const flowerCount = 10;
         const flowerContainer = document.getElementById("flowers-container");
 
         for (let i = 0; i < flowerCount; i++)
         {
-            const flower = document.createElement("div");
+            const flower = document.createElement("img");
             flower.classList.add("flower");
-
+            flower.src = "flower_closed.png";
             flower.style.top = Math.random() * 90 + "vh";
             flower.style.left = Math.random() * 90 + "vw";
 
+            let isAnimating = false;
+            let isOpened = false;
+
             flower.addEventListener("mouseenter", () =>
             {
-                flower.style.backgroundImage = "url('flower_opening.gif')";
+                if (!isAnimating && !isOpened)
+                {
+                    isAnimating = true;
+                    flower.src = "flower_opening.gif";
+
+                    setTimeout(() =>
+                    {
+                        flower.src = "flower_opened.png";
+                        isAnimating = false;
+                        isOpened = true;
+                    }, 2000); // Adjust to match flower_opening.gif length
+                }
             });
 
             flower.addEventListener("mouseleave", () =>
             {
-                flower.style.backgroundImage = "url('flower_closing.gif')";
+                if (!isAnimating && isOpened)
+                {
+                    isAnimating = true;
+                    flower.src = "flower_closing.gif";
+
+                    setTimeout(() =>
+                    {
+                        flower.src = "flower_closed.png";
+                        isAnimating = false;
+                        isOpened = false;
+                    }, 2000); // Match flower_closing.gif length
+                }
             });
 
             flowerContainer.appendChild(flower);
