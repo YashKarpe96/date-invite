@@ -437,9 +437,14 @@
         
                 if (hoverCount <= 2)
                 {
-                    const offsetX = (Math.random() * 60 - 80); // -30 to +30px
-                    const offsetY = (Math.random() * 30 - 55); // -15 to +15px
-        
+                    const minX = 50;
+                    const maxX = 80;
+                    const offsetX = (Math.random() < 0.5 ? -1 : 1) * (minX + Math.random() * (maxX - minX));
+                
+                    const minY = 40;
+                    const maxY = 70;
+                    const offsetY = (Math.random() < 0.5 ? -1 : 1) * (minY + Math.random() * (maxY - minY));
+                
                     noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
                 }
                 else
