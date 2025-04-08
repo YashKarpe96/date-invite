@@ -233,7 +233,11 @@
                 font-size: 1.3em;
             }
         }
-
+        #noBtn
+        {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -265,7 +269,7 @@
 
         <div class="button-row">
             <button class="btn" onclick="showYesPopup()">Yes, I’d love to!</button>
-            <button class="btn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
+            <button class="btn" id="noBtn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
         </div>
     </div>
 
@@ -421,6 +425,29 @@
                 setInterval(() => animateFlower(), 7000 + Math.random() * 2000);
             }
         });
+        // No button hover "trick" on desktop
+        let hoverCount = 0;
+        const noBtn = document.getElementById("noBtn");
+
+        if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) // only on desktop
+        {
+            noBtn.addEventListener("mouseenter", () =>
+            {
+                hoverCount++;
+        
+                if (hoverCount <= 2)
+                {
+                    const offsetX = (Math.random() * 60 - 30); // -30 to +30px
+                    const offsetY = (Math.random() * 30 - 15); // -15 to +15px
+        
+                    noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                }
+                else
+                {
+                    noBtn.style.transform = `translate(0, 0)`; // Reset
+                }
+            });
+        }
     </script>
 </body>
 </html>
