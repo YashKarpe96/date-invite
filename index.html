@@ -290,8 +290,7 @@
             <p>Looks like it’s just me and the croissants now... 🌧️</p>
             <img src="sad.gif" style="width:200px;">
             <audio id="sadAudio" preload="auto">
-            <source src="https://yashkarpe96.github.io/date-invite/rejected.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
+                <source src="rejected.mp3" type="audio/mpeg">
             </audio>
         </div>
     </div>
@@ -312,14 +311,6 @@
     <img class="flower" src="flower_closed.png" id="flower6">
     <img class="flower" src="flower_closed.png" id="flower7">
     <img class="flower" src="flower_closed.png" id="flower8">
-
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function()
-        {
-            emailjs.init("_nguxi2UUGB8x-PHC"); // Replace with your actual public key
-        })();
-    </script>
 
     <script>
         // Music toggle
@@ -365,8 +356,13 @@
             document.getElementById("sadModal").style.display = "flex";
         
             const sadAudio = document.getElementById("sadAudio");
-            sadAudio.currentTime = 0;
-            sadAudio.play().catch(err => console.error("Sad audio error:", err));
+            if (sadAudio)
+            {
+                sadAudio.pause();
+                sadAudio.currentTime = 0;
+                sadAudio.load();
+                sadAudio.play().catch(err => console.error("Audio play failed:", err));
+            }
         
             const bgMusic = document.getElementById("bg-music");
             if (bgMusic)
@@ -515,5 +511,29 @@
             });
         }
     </script>
+    <script type="module">
+        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    
+        emailjs.init("_nguxi2UUGB8x-PHC"); // Replace with your actual public key
+    
+        window.sendSimpleMessage = function (response)
+        {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+            emailjs.send("service_nazexql", "template_i1liswn", {
+                message: response,
+                name: "Meenal",
+                time: formattedTime
+            }).then(() =>
+            {
+                console.log("✅ Email sent!");
+            }).catch((error) =>
+            {
+                console.error("❌ Email failed:", error);
+            });
+        };
+    </script>
+
 </body>
 </html>
