@@ -282,7 +282,7 @@
             <h2>Oh no... 💔</h2>
             <p>Looks like I’ll have to take a walk under the sakura alone... 🌧️</p>
             <img src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" style="width:200px;">
-            <audio id="sadAudio" src="rejected.mp3" autoplay></audio>
+            <audio id="sadAudio" src="rejected.mp3"></audio>
         </div>
     </div>
 
@@ -358,11 +358,18 @@
         function closeModal()
         {
             document.getElementById("sadModal").style.display = "none";
-            const audio = document.getElementById("sadAudio");
-            audio.pause();
-            audio.currentTime = 0;
+        
+            const sadAudio = document.getElementById("sadAudio");
+            sadAudio.pause();
+            sadAudio.currentTime = 0;
+        
+            const bgMusic = document.getElementById("bg-music");
+            if (bgMusic)
+            {
+                bgMusic.play().catch(() => {});
+            }
         }
-
+        
         function showYesPopup()
         {
             const popup = document.getElementById("yesPopup");
