@@ -261,38 +261,37 @@
             flower.style.top = Math.random() * 90 + "vh";
             flower.style.left = Math.random() * 90 + "vw";
 
-            let isAnimating = false;
-            let isOpened = false;
+            // Track animation state
+            flower.dataset.state = "closed";
 
             flower.addEventListener("mouseenter", () =>
             {
-                if (!isAnimating && !isOpened)
+                if (flower.dataset.state === "closed")
                 {
-                    isAnimating = true;
+                    flower.dataset.state = "opening";
                     flower.src = "flower_opening.gif";
 
                     setTimeout(() =>
                     {
                         flower.src = "flower_opened.png";
-                        isAnimating = false;
-                        isOpened = true;
-                    }, 2000); // Adjust to match flower_opening.gif length
+                        flower.dataset.state = "opened";
+                    }, 2000); // adjust based on gif duration
                 }
             });
 
+
             flower.addEventListener("mouseleave", () =>
             {
-                if (!isAnimating && isOpened)
+                if (flower.dataset.state === "opened")
                 {
-                    isAnimating = true;
+                    flower.dataset.state = "closing";
                     flower.src = "flower_closing.gif";
 
                     setTimeout(() =>
                     {
                         flower.src = "flower_closed.png";
-                        isAnimating = false;
-                        isOpened = false;
-                    }, 2000); // Match flower_closing.gif length
+                        flower.dataset.state = "closed";
+                    }, 2000); // adjust based on gif duration
                 }
             });
 
