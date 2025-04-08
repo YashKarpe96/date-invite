@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sakura Summer Proposal</title>
-
     <style>
-
         body
         {
             margin: 0;
@@ -23,27 +20,23 @@
             min-height: 100vh;
             position: relative;
         }
-
         .container
         {
             padding: 60px 20px;
             z-index: 2;
             position: relative;
         }
-
         h1
         {
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #e06c9f;
         }
-
         p
         {
             font-size: 1.2em;
             margin-bottom: 30px;
         }
-
         .btn
         {
             padding: 15px 30px;
@@ -58,12 +51,10 @@
             cursor: pointer;
             margin: 10px;
         }
-
         .btn:hover
         {
             background-color: #e06c9f;
         }
-
         .petal
         {
             position: absolute;
@@ -74,7 +65,6 @@
             animation: fall linear infinite;
             pointer-events: none;
         }
-
         @keyframes fall
         {
             0%
@@ -88,7 +78,6 @@
                 opacity: 0;
             }
         }
-
         input[type="date"],
         input[type="time"]
         {
@@ -100,7 +89,6 @@
             background-color: #fff0f5;
             box-shadow: 0 2px 5px rgba(224, 108, 159, 0.2);
         }
-
         .button-row
         {
             display: flex;
@@ -109,7 +97,6 @@
             flex-wrap: wrap;
             margin-top: 20px;
         }
-
         /* Modal for sad gif */
         .modal
         {
@@ -124,7 +111,6 @@
             align-items: center;
             z-index: 9999;
         }
-
         .modal-content
         {
             background: white;
@@ -133,7 +119,6 @@
             text-align: center;
             position: relative;
         }
-
         .close-btn
         {
             position: absolute;
@@ -143,7 +128,6 @@
             font-size: 1.2em;
             color: #999;
         }
-
         /* Flowers */
         #flowers-container
         {
@@ -155,7 +139,6 @@
             pointer-events: none;
             z-index: 2;
         }
-
         .flower
         {
             position: absolute;
@@ -165,16 +148,11 @@
             z-index: 2;
             transition: transform 0.3s ease;
         }
-
     </style>
-
 </head>
 <body>
-
     <div class="container">
-
         <h1>Will You Be My Summer Date?</h1>
-
         <p>
             Imagine a sunny afternoon, the air warm and soft,  
             cherry blossoms fluttering like our laughter in the breeze... 🌸<br><br>
@@ -182,26 +160,17 @@
             chirpy, bright, and full of energy, just like the perfect summer day.<br><br>
             So, how about we make it official? One summer day, just you and me. 💫
         </p>
-
         <br>
         <label>Date: </label><br>
         <input type="date" value="2025-04-11" disabled><br><br>
-
         <label for="time">Pick a time:</label><br>
         <input type="time" id="time" name="time" min="17:00" max="18:00" value="17:00"><br><br>
-
-        <div>
-            <span style="cursor: pointer; color: #e06c9f; text-decoration: underline;" onclick="revealLocation()">Guess the Location?</span>
-            <p id="location" style="display:none;">🌅 It’s a surprise picnic under the trees… with your favorite treats!</p>
-        </div>
-
         <div class="button-row">
-            <a class="btn" href="mailto:your.email@example.com?subject=YES to Summer Love 🌸">Yes, I’d love to!</a>
+            <!-- When "Yes" is clicked, it goes to confirmation.html -->
+            <a class="btn" href="confirmation.html">Yes, I’d love to!</a>
             <button class="btn" onclick="triggerNo()" style="background-color: #cccccc; color: #333;">No 😢</button>
         </div>
-
     </div>
-
     <!-- Sad Modal -->
     <div class="modal" id="sadModal">
         <div class="modal-content">
@@ -212,12 +181,9 @@
             <audio id="sadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" autoplay loop></audio>
         </div>
     </div>
-
     <!-- Flower Elements -->
     <div id="flowers-container"></div>
-
     <script>
-
         // Sakura petals
         for (let i = 0; i < 25; i++)
         {
@@ -228,20 +194,12 @@
             petal.style.animationDelay = Math.random() * 5 + "s";
             document.body.appendChild(petal);
         }
-
-        // Reveal surprise location
-        function revealLocation()
-        {
-            document.getElementById("location").style.display = "block";
-        }
-
-        // No button sad modal
+        // No button sad modal functions
         function triggerNo()
         {
             document.getElementById("sadModal").style.display = "flex";
             document.getElementById("sadAudio").play();
         }
-
         function closeModal()
         {
             document.getElementById("sadModal").style.display = "none";
@@ -249,11 +207,9 @@
             audio.pause();
             audio.currentTime = 0;
         }
-
         // Interactive flowers
         const flowerCount = 10;
         const flowerContainer = document.getElementById("flowers-container");
-
         for (let i = 0; i < flowerCount; i++)
         {
             const flower = document.createElement("img");
@@ -261,17 +217,14 @@
             flower.src = "flower_closed.png";
             flower.style.top = Math.random() * 90 + "vh";
             flower.style.left = Math.random() * 90 + "vw";
-
             // Track animation state
             flower.dataset.state = "closed";
-
             flower.addEventListener("mouseenter", () =>
             {
                 if (flower.dataset.state === "closed")
                 {
                     flower.dataset.state = "opening";
                     flower.src = "flower_opening.gif";
-
                     setTimeout(() =>
                     {
                         flower.src = "flower_opened.png";
@@ -279,15 +232,12 @@
                     }, 2000); // adjust based on gif duration
                 }
             });
-
-
             flower.addEventListener("mouseleave", () =>
             {
                 if (flower.dataset.state === "opened")
                 {
                     flower.dataset.state = "closing";
                     flower.src = "flower_closing.gif";
-
                     setTimeout(() =>
                     {
                         flower.src = "flower_closed.png";
@@ -295,11 +245,8 @@
                     }, 2000); // adjust based on gif duration
                 }
             });
-
             flowerContainer.appendChild(flower);
         }
-
     </script>
-
 </body>
 </html>
